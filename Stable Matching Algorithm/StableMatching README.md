@@ -1,5 +1,9 @@
 This file is my crack at trying the Stable Matching algorithm in an Object Oriented way. As a result, this may not even count as O(n^2), but it was something that I made to help me better understand how Stable Matching works, and how it can be used.
 
+Links to other algorithms that use Stable Matching:
+https://www.geeksforgeeks.org/stable-marriage-problem/
+https://blog.bitsrc.io/analysis-of-algorithms-stable-matching-explained-5f3c51876cfe
+
 Main:
     In the main method, 4 people are created: 2 men and 2 woman. 
     After which, the 4 people chose thier preference amongst each other.
@@ -38,6 +42,3 @@ How Algorithm Works:
 Return the set S of engaged pairs
 
 This algorithm in this form is a lot simpler than my attempt at replicating it, so if you have a hard time figuring out the code, this might be a better way at explaining it.
-
-Links to other algorithms that use Stable Matching:
-https://www.geeksforgeeks.org/stable-marriage-problem/
