@@ -12,36 +12,48 @@ public class StableAlgorithm {
 
 
      public static ArrayList<Person> addAllPeople(Person... people){
-         ArrayList<Person> p = new ArrayList<Person>();
-         for(Person person : people){
-             p.add(person);
-         }
+        ArrayList<Person> p = new ArrayList<Person>();
+        for(Person person : people){
+            p.add(person);
+        }
 
         return p;
+     }
+
+     private static void createEngagement(Person man, Person woman){
+        man.performPartnership(Status.ENGAGED, woman);
+        woman.performPartnership(Status.ENGAGED, man);
+     }
+
+     private static void getMarried(Person man, Person woman){
+         man.performPartnership(Status.MARRIED, woman);
+         woman.performPartnership(Status.MARRIED, man);
      }
 
      public static void performStableMatching(ArrayList<Person> people, boolean performedRecursion){
         int numMen = 0;
         int numWomen = 0;
-         ArrayList<Person> men = new ArrayList<Person>();
-         ArrayList<Person> women = new ArrayList<Person>();
-         ArrayList<Person> listOfUnpaired = new ArrayList<Person>();
+        ArrayList<Person> men = new ArrayList<Person>();
+        ArrayList<Person> women = new ArrayList<Person>();
+        ArrayList<Person> listOfUnpaired = new ArrayList<Person>();
 
         for(Person person : people){
-             if(person.getGender().equals(Gender.MALE)){
-                 numMen++;
-                 men.add(person);
-             }
-             else{
-                 numWomen++;
-                 women.add(person);
-             }
+            if(person.getGender().equals(Gender.MALE)){
+                numMen++;
+                men.add(person);
+            }
+            else{
+                numWomen++;
+                women.add(person);
+            }
         }
 
         //if numMen =/= numWomen, you cannot create a stable match, so break it off
         if(numMen != numWomen){
-             System.out.println("Cannot create stable/perfect match. Uneven amount of men and women.");
-             return;
+            if(!performedRecursion){
+                System.out.println("Cannot create stable/perfect match. Uneven amount of men and women.");
+            }
+            return;
         }
         else{
             if(!performedRecursion){
@@ -51,9 +63,10 @@ public class StableAlgorithm {
 
         //This means there is an even number of men and women and you can begin the algorithm
         for(Person man : men){
-            //have each man propose to their number one choice
+            //have each man propose to every woman in order of preference until the man is engaged
             int choiceNumber = 1;
             while(man.getStatus().equals(Status.FREE)){
+                //find the woman the man wants to propose to
                 for(Person woman : women){
                     if(man.getPreferences().get(woman) == choiceNumber){
                         //check the relationship status of the woman to see if she can accept the proposal
@@ -61,14 +74,15 @@ public class StableAlgorithm {
                             //this means the woman can accept the man's proposal
                             createEngagement(man, woman);
                         }
-                        //if woman is already engaged, check to see if she would be happy with her choice
+                        //if woman is already engaged, check to see if she is happy with her current engagement already
                         else if(woman.getStatus().equals(Status.ENGAGED)){
                             if(woman.getPreferences().get(woman.getPartner()) < woman.getPreferences().get(man)){
-                                //This means she is happy with her choice and will reject the proposal
+                                //This means she is happy with her current engagement and will reject the proposal. Must loop around again.
                                 choiceNumber++;
+                                break;
                             }
-                            else{
-                                //This means she prefers the man who proposed over her fiance and accepts the man's proposal
+                            else{ 
+                                //This means she is not happy with her current engagement and accepts the man's proposal
 
                                 //break off old engagement
                                 Person freedMan = woman.getPartner();
@@ -81,13 +95,11 @@ public class StableAlgorithm {
                             }
                         }
                     }
-                    else{
-                        choiceNumber++;
-                    }
                 }
+                //This means the man didn't find the woman while looping through this time. Must loop around again.
+                choiceNumber++;
             }
-            
-        }//End of the matching process...
+        }
 
         //check to see if there are any women who didn't get proposed to
         for(Person woman : women){
@@ -115,16 +127,5 @@ public class StableAlgorithm {
             }
         }
 
-     }
-
-
-     public static void createEngagement(Person man, Person woman){
-        man.performPartnership(Status.ENGAGED, woman);
-        woman.performPartnership(Status.ENGAGED, man);
-     }
-
-     public static void getMarried(Person man, Person woman){
-         man.performPartnership(Status.MARRIED, woman);
-         woman.performPartnership(Status.MARRIED, man);
      }
 }

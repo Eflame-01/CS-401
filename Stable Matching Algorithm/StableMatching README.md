@@ -1,4 +1,4 @@
-This file is my crack at trying the Stable Matching algorithm.
+This file is my crack at trying the Stable Matching algorithm in an Object Oriented way.
 
 Main:
     In the main method, 4 people are created: 2 men and 2 woman. 
