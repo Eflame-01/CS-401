@@ -10,7 +10,9 @@ public class StableAlgorithm {
      * that perform the stable matching.
      */
 
-
+     /**addAllPeople() adds all the people who want to be matched
+      * into an ArrayList to be sorted out later
+      */
      public static ArrayList<Person> addAllPeople(Person... people){
         ArrayList<Person> p = new ArrayList<Person>();
         for(Person person : people){
@@ -20,16 +22,25 @@ public class StableAlgorithm {
         return p;
      }
 
+     /**createEngagement() creates an engagement between two 
+      * people. This method is called by the performStableMatching() method.
+      */
      private static void createEngagement(Person man, Person woman){
         man.performPartnership(Status.ENGAGED, woman);
         woman.performPartnership(Status.ENGAGED, man);
      }
 
+     /**getMarried() creates an performs the marriage between two 
+      * people. This method is called by the performStableMatching() method.
+      */
      private static void getMarried(Person man, Person woman){
          man.performPartnership(Status.MARRIED, woman);
          woman.performPartnership(Status.MARRIED, man);
      }
 
+     /**performStableMatching() uses the methodology from the Stable Matching
+      * problem to find perfect matching for couples and print the results out.
+      */
      public static void performStableMatching(ArrayList<Person> people, boolean performedRecursion){
         int numMen = 0;
         int numWomen = 0;
@@ -112,7 +123,6 @@ public class StableAlgorithm {
         listOfUnpaired.trimToSize();
         if(listOfUnpaired.size() > 0){
             performStableMatching(listOfUnpaired, true);
-            
         }
 
         //print the results in the base function

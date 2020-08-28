@@ -67,7 +67,9 @@ public class Person {
          this.partner = partner;
      }
 
-     //functions to add prefernces
+     /**addPreference() adds a person and their rank to the current person's
+      * list of preferences.
+      */
      public boolean addPreference(Person person, int rank){
         //checking if genders are different
         if(person.gender.equals(this.gender)){
@@ -92,6 +94,9 @@ public class Person {
         return true;
      }
 
+     /**performPartnership() creates a partnership between the current person and their
+      * partner. You can only create engagements and marriages when calling this function.
+      */
      public void performPartnership(Status status, Person partner){
          if(status.equals(Status.FREE)){
              //you cannot perform a free partnership with someone... if you like em then you gotta put a ring on it.
