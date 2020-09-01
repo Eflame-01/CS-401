@@ -36,7 +36,7 @@ public class StableAlgorithm {
      * by his prefered choice :(
      */
     private static Person breakOffEngagement(Person woman){
-        System.out.println("Breaking Off Engagement for " + woman.getPartner().getName() + " and " + woman.getName());
+        System.out.println("- Breaking Off Engagement for " + woman.getPartner().getName() + " and " + woman.getName());
         Person freeMan = woman.getPartner();
         freeMan.setStatus(Status.FREE);
         freeMan.setPartner(null);
@@ -48,14 +48,15 @@ public class StableAlgorithm {
      * people. This method is called by the performStableMatching() method.
      */
     private static void getMarried(Person man, Person woman){
+        System.out.println(man.getName() + " and " + woman.getName() + " got married!");
         man.performPartnership(Status.MARRIED, woman);
         woman.performPartnership(Status.MARRIED, man);
     }
 
-     /**performStableMatching() uses the methodology from the Stable Matching
-      * problem to find perfect matching for couples and print the results out.
-      * Runtime: n^2 + 4n + 20 OR O(n^2)
-      */
+    /**performStableMatching() uses the methodology from the Stable Matching
+     * problem to find perfect matching for couples and print the results out.
+     * Runtime: n^2 + 4n + 20 OR O(n^2)
+     */
     public static void performStableMatching(ArrayList<Person> people, boolean performedRecursion){
         int numMen = 0;
         int numWomen = 0;
@@ -79,17 +80,16 @@ public class StableAlgorithm {
         //if numMen =/= numWomen, you cannot create a stable match, so break it off
         if(numMen != numWomen){
             if(!performedRecursion){
-                System.out.println("Cannot create stable/perfect match. Uneven amount of men and women.");
+                System.out.println("Cannot create stable/perfect match. Uneven amount of men and women...\n");
             }
             return;
         }
+        //this means there is an even number of men and women and you can begin the algorithm
         else{
             if(!performedRecursion){
                 System.out.println("Beginning Stable Mathching...\n");
             }
         }
-
-        //this means there is an even number of men and women and you can begin the algorithm
 
         //have every man who is free propose to a woman in order of preference until the man is engaged
         int i = 0;
@@ -101,6 +101,7 @@ public class StableAlgorithm {
                     if(woman.getStatus().equals(Status.FREE)){
                         //this means the woman can accept the man's proposal
                         createEngagement(man, woman);
+                        break;
                     }
                     else if(woman.getStatus().equals(Status.ENGAGED)){
                         //this means the woman needs to see if she prefers her current relationship over the proposal
@@ -111,9 +112,10 @@ public class StableAlgorithm {
                         else{
                             //this means she prefers the new proposal over her current relationship. Free the man and engage the new couple
                             Person freeMan = breakOffEngagement(woman);
-                            System.out.println("Adding " + freeMan.getName() + " to the list of unpaired.");
+                            System.out.println("- Adding " + freeMan.getName() + " to the list of unpaired.");
                             listOfUnpaired.add(freeMan);
                             createEngagement(man, woman);
+                            break;
                         }
                     }
                 }
@@ -124,13 +126,14 @@ public class StableAlgorithm {
                 //move on to next man in list
                 i++;
             }
+            //in case the man's choice breaks off engagement in future, increment the choice number to the next numbner
             man.setChoiceNumber(man.getChoiceNumber() + 1);
         }
 
         //check to see if there are any women who didn't get proposed to
         for(Person woman : women){
             if(woman.getStatus().equals(Status.FREE)){
-                System.out.println("Adding " + woman.getName() + " to the list of unpaired.");
+                System.out.println("- Adding " + woman.getName() + " to the list of unpaired.");
                 listOfUnpaired.add(woman);
             }
         }
@@ -160,6 +163,5 @@ public class StableAlgorithm {
                 }
             }
         }
-
     }
 }
