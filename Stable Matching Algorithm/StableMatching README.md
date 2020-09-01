@@ -1,4 +1,4 @@
-This file is my crack at trying the Stable Matching algorithm in an Object Oriented way. As a result, this may not even count as O(n^2), but it was something that I made to help me better understand how Stable Matching works, and how it can be used.
+This file is my crack at trying the Stable Matching algorithm in an Object Oriented way. IT may not be as simple as the other algorithms online, but it was something that I made to help me better understand how Stable Matching works, and how it can be used.
 
 Links to other algorithms that use Stable Matching:
 https://www.geeksforgeeks.org/stable-marriage-problem/

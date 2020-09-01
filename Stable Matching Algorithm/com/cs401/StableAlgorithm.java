@@ -55,7 +55,6 @@ public class StableAlgorithm {
 
     /**performStableMatching() uses the methodology from the Stable Matching
      * problem to find perfect matching for couples and print the results out.
-     * Runtime: n^2 + 4n + 20 OR O(n^2)
      */
     public static void performStableMatching(ArrayList<Person> people, boolean performedRecursion){
         int numMen = 0;
