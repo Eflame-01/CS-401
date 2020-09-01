@@ -17,29 +17,29 @@ public class Main {
         Person womanThree = new Person("woman 3", Person.Gender.FEMALE);
 
         //Create the preferences
-        manOne.addPreference(womanOne, 1);
-        manOne.addPreference(womanTwo, 3);
-        manOne.addPreference(womanThree, 2);
+        manOne.addPreference(womanOne);
+        manOne.addPreference(womanThree);
+        manOne.addPreference(womanTwo);
 
-        manTwo.addPreference(womanOne, 1);
-        manTwo.addPreference(womanTwo, 2);
-        manTwo.addPreference(womanThree, 3);
+        manTwo.addPreference(womanOne);
+        manTwo.addPreference(womanTwo);
+        manTwo.addPreference(womanThree);
 
-        manThree.addPreference(womanOne, 3);
-        manThree.addPreference(womanTwo, 2);
-        manThree.addPreference(womanThree, 1);
+        manThree.addPreference(womanThree);
+        manThree.addPreference(womanTwo);
+        manThree.addPreference(womanOne);
 
-        womanOne.addPreference(manTwo, 1);
-        womanOne.addPreference(manOne, 2);
-        womanOne.addPreference(manThree, 3);
+        womanOne.addPreference(manTwo);
+        womanOne.addPreference(manOne);
+        womanOne.addPreference(manThree);
 
-        womanTwo.addPreference(manTwo, 1);
-        womanTwo.addPreference(manOne, 3);
-        womanTwo.addPreference(manThree, 2);
+        womanTwo.addPreference(manTwo);
+        womanTwo.addPreference(manThree);
+        womanTwo.addPreference(manOne);
 
-        womanThree.addPreference(manOne, 3);
-        womanThree.addPreference(manTwo, 2);
-        womanThree.addPreference(manThree, 1);
+        womanThree.addPreference(manThree);
+        womanThree.addPreference(manTwo);
+        womanThree.addPreference(manOne);
 
         //add the people to the list
         ArrayList<Person> people = StableAlgorithm.addAllPeople(manOne, manTwo, manThree, womanOne, womanTwo, womanThree);

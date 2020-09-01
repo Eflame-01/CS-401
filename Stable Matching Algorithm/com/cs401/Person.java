@@ -25,6 +25,7 @@ public class Person {
      private Status status;
      private HashMap<Person, Integer> preferences;
      private Person partner;
+     private int choiceNumber = 1;
 
      //constructor
      public Person(String name, Gender gender){
@@ -66,18 +67,24 @@ public class Person {
      public void setPartner(Person partner){
          this.partner = partner;
      }
+     public int getChoiceNumber(){
+         return choiceNumber;
+     }
+     public void setChoiceNumber(int choiceNumber){
+         this.choiceNumber = choiceNumber;
+     }
 
      /**addPreference() adds a person and their rank to the current person's
       * list of preferences.
       */
-     public boolean addPreference(Person person, int rank){
+     public boolean addPreference(Person person){
         //checking if genders are different
         if(person.gender.equals(this.gender)){
             //This pair won't work.
             return false;
         }
         //checking if there is already a rank with this number
-        if(this.preferences.containsValue(rank)){
+        if(this.preferences.containsValue(this.choiceNumber)){
             //There is no need to pair.
             return false;
         }
@@ -90,7 +97,8 @@ public class Person {
 
         //if we get here, then that means this person is the right gender, hasn't already been paired, and has a valid rank number
         //This is a valid pair.
-        this.preferences.put(person, rank);
+        this.preferences.put(person, this.choiceNumber);
+        this.choiceNumber++;
         return true;
      }
 
