@@ -77,29 +77,30 @@ public class Person {
      /**addPreference() adds a person and their rank to the current person's
       * list of preferences.
       */
-     public boolean addPreference(Person person){
-        //checking if genders are different
-        if(person.gender.equals(this.gender)){
-            //This pair won't work.
-            return false;
+     public void addPreference(Person... people){
+        for(Person person : people){
+            //checking if genders are different
+            if(person.gender.equals(this.gender)){
+                //This pair won't work.
+                continue;
+            }
+            //checking if there is already a rank with this number
+            else if(this.preferences.containsValue(this.choiceNumber)){
+                //There is no need to pair.
+                continue;
+            }
+            //checking to see if person is already in list of preferences
+            else if(this.preferences.containsKey(person)){
+                //This pair won't work.
+                continue;
+            }
+            //if we get here, then that means this person is the right gender, hasn't already been paired, and has a valid rank number
+            //This is a valid pair.
+            else{
+                this.preferences.put(person, this.choiceNumber);
+                this.choiceNumber++;
+            }
         }
-        //checking if there is already a rank with this number
-        if(this.preferences.containsValue(this.choiceNumber)){
-            //There is no need to pair.
-            return false;
-        }
-        
-        //checking to see if person is already in list of preferences
-        if(this.preferences.containsKey(person)){
-            //This pair won't work.
-            return false;
-        }
-
-        //if we get here, then that means this person is the right gender, hasn't already been paired, and has a valid rank number
-        //This is a valid pair.
-        this.preferences.put(person, this.choiceNumber);
-        this.choiceNumber++;
-        return true;
      }
 
      /**performPartnership() creates a partnership between the current person and their

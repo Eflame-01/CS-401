@@ -53,6 +53,16 @@ public class StableAlgorithm {
         woman.performPartnership(Status.MARRIED, man);
     }
 
+    private static ArrayList<Person> replaceMan(ArrayList<Person> list, Person person){
+        for(Person p : list){
+            if(p.getName().equals(person.getName())){
+                p = person;
+            }
+        }
+
+        return list;
+    }
+
     /**performStableMatching() uses the methodology from the Stable Matching
      * problem to find perfect matching for couples and print the results out.
      */
@@ -74,6 +84,7 @@ public class StableAlgorithm {
                 numWomen++;
                 women.add(person);
             }
+            listOfUnpaired.add(person);
         }
 
         //if numMen =/= numWomen, you cannot create a stable match, so break it off
@@ -87,6 +98,9 @@ public class StableAlgorithm {
         else{
             if(!performedRecursion){
                 System.out.println("Beginning Stable Mathching...\n");
+            }
+            else{
+                System.out.println("Beginning Stable Matching Again...\n");
             }
         }
 
@@ -107,12 +121,13 @@ public class StableAlgorithm {
                         if(woman.getPreferences().get(woman.getPartner()) < woman.getPreferences().get(man)){
                             //this means she prefers her current relationship. Have the man move on to his next choice
                             man.setChoiceNumber(man.getChoiceNumber() + 1);
+                            System.out.println("- " + woman.getName() + " rejected " + man.getName());
                         }
                         else{
                             //this means she prefers the new proposal over her current relationship. Free the man and engage the new couple
                             Person freeMan = breakOffEngagement(woman);
                             System.out.println("- Adding " + freeMan.getName() + " to the list of unpaired.");
-                            listOfUnpaired.add(freeMan);
+                            listOfUnpaired = replaceMan(listOfUnpaired, freeMan);
                             createEngagement(man, woman);
                             break;
                         }
@@ -125,28 +140,19 @@ public class StableAlgorithm {
                 //move on to next man in list
                 i++;
             }
-            //in case the man's choice breaks off engagement in future, increment the choice number to the next numbner
-            man.setChoiceNumber(man.getChoiceNumber() + 1);
         }
 
-        //check to see if there are any women who didn't get proposed to
-        for(Person woman : women){
-            if(woman.getStatus().equals(Status.FREE)){
-                System.out.println("- Adding " + woman.getName() + " to the list of unpaired.");
-                listOfUnpaired.add(woman);
+        System.out.println();
+        int numFree = 0;
+        for(Person person : listOfUnpaired){
+            System.out.println("Status for " + person.getName() + ": " + person.getStatus());
+            if(person.getStatus().equals(Status.FREE)){
+                numFree++;
             }
         }
 
-        //if ther are still people who are free, perform the function again to pair people
-        listOfUnpaired.trimToSize();
-        System.out.print("Unpaird People: ");
-        for(Person person : listOfUnpaired){
-            System.out.print(person.getName() + " ");
-        }
-        System.out.println("\n");
-
-        //if there are people who aren't paird then perform another round of stable matching.
-        if(listOfUnpaired.size() > 0){
+        System.out.println();
+        if(numFree > 0){
             performStableMatching(listOfUnpaired, true);
         }
 

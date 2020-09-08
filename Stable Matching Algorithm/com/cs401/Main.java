@@ -19,45 +19,15 @@ public class Main {
         Person womanFour = new Person("woman 4", Person.Gender.FEMALE);
 
         //Create the preferences
-        manOne.addPreference(womanOne);
-        manOne.addPreference(womanTwo);
-        manOne.addPreference(womanThree);
-        manOne.addPreference(womanFour);
+        manOne.addPreference(womanOne, womanTwo, womanThree, womanFour);
+        manTwo.addPreference(womanTwo, womanThree, womanOne, womanFour);
+        manThree.addPreference(womanThree, womanOne, womanTwo, womanFour);
+        manFour.addPreference(womanOne, womanTwo, womanThree, womanFour);
 
-        manTwo.addPreference(womanTwo);
-        manTwo.addPreference(womanThree);
-        manTwo.addPreference(womanOne);
-        manTwo.addPreference(womanFour);
-
-        manThree.addPreference(womanThree);
-        manThree.addPreference(womanOne);
-        manThree.addPreference(womanTwo);
-        manThree.addPreference(womanFour);
-
-        manFour.addPreference(womanOne);
-        manFour.addPreference(womanTwo);
-        manFour.addPreference(womanThree);
-        manFour.addPreference(womanFour);
-
-        womanOne.addPreference(manTwo);
-        womanOne.addPreference(manThree);
-        womanOne.addPreference(manFour);
-        womanOne.addPreference(manOne);
-
-        womanTwo.addPreference(manThree);
-        womanTwo.addPreference(manFour);
-        womanTwo.addPreference(manOne);
-        womanTwo.addPreference(manTwo);
-
-        womanThree.addPreference(manFour);
-        womanThree.addPreference(manOne);
-        womanThree.addPreference(manTwo);
-        womanThree.addPreference(manThree);
-
-        womanFour.addPreference(manOne);
-        womanFour.addPreference(manTwo);
-        womanFour.addPreference(manThree);
-        womanFour.addPreference(manFour);
+        womanOne.addPreference(manTwo, manThree, manFour, manOne);
+        womanTwo.addPreference(manThree, manFour, manOne, manTwo);
+        womanThree.addPreference(manFour, manOne, manTwo, manThree);
+        womanFour.addPreference(manOne, manTwo, manThree, manFour);
 
         //add the people to the list
         ArrayList<Person> people = StableAlgorithm.addAllPeople(manOne, manTwo, manThree, manFour, womanOne, womanTwo, womanThree, womanFour);
