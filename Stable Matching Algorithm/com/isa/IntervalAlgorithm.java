@@ -1,6 +1,5 @@
 package com.isa;
 
-import com.isa.Interval;
 import java.util.ArrayList;
 
 public class IntervalAlgorithm{
