@@ -1,4 +1,4 @@
-package com.cs401;
+package com.sma;
 
 import java.util.ArrayList;
 

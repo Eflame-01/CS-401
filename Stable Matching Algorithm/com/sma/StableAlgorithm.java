@@ -1,9 +1,9 @@
-package com.cs401;
+package com.sma;
 
 import java.util.ArrayList;
 
-import com.cs401.Person.Gender;
-import com.cs401.Person.Status;
+import com.sma.Person.Gender;
+import com.sma.Person.Status;
 
 public class StableAlgorithm {
     /**StableAlgorithm has the functions 
