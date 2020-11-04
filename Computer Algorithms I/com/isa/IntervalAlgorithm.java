@@ -6,7 +6,7 @@ public class IntervalAlgorithm{
     protected ArrayList<Interval> A;
 
     private ArrayList<Interval> sortIntervals(ArrayList<Interval> list){
-        //TODO: merge sort
+        //TODO: sort
         return list;
     }
 

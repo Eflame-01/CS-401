@@ -3,14 +3,22 @@ package com.isa;
 import java.util.ArrayList;
 
 public class Interval {
+    private String name;
     private int startTime;
     private int finTime;
 
-    public Interval(int startTime, int finTime){
+    public Interval(String name, int startTime, int finTime){
+        this.setName(name);
         this.setStartTime(startTime);
         this.setFinTime(finTime);
     }
 
+    public String getName(){
+        return name;
+    }
+    public void setName(String name){
+        this.name = name;
+    }
     public int getStartTime(){
         return startTime;
     }
