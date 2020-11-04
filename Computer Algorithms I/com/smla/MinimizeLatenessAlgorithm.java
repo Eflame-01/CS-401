@@ -35,7 +35,7 @@ public class MinimizeLatenessAlgorithm {
         List<int[]> A = new ArrayList<int[]>();
 
         for(Schedule j : list){
-            int interval = {time, time + j.time, j.deadline}
+            int interval[] = {time, time + j.time, j.deadline}
             A.add(interval);
             time = fin;
         }
